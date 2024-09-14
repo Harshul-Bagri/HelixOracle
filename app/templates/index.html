@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelixOracle</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>HelixOracle</h1>
+        <button id="profile-btn">Profile</button>
+    </header>
+
+    <main>
+        <section class="upload-section">
+            <h2>Neurological Disease Risk Prediction</h2>
+            <form id="uploadForm" action="/predict" method="post" enctype="multipart/form-data">
+                <label for="file">Upload CSV File:</label>
+                <input type="file" id="file" name="dna_file" accept=".csv">
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="results-section">
+            <h2>Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Disease</th>
+                        <th>Risk</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Alzheimer's Disease</td>
+                        <td id="risk">N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="analysis-summary">
+                <p>Risk Level: <span id="risk-level">Awaiting Upload</span></p>
+                <button id="consult-btn">Consult Specialist</button>
+            </div>
+
+            <div class="chart-container">
+                <h3>Risk Comparison</h3>
+                <canvas id="riskChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function (e) {
+            e.preventDefault();  // Prevent default form submission
+
+            const formData = new FormData();
+            const fileInput = document.getElementById('file');
+            formData.append('dna_file', fileInput.files[0]);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    // Update the risk percentage in the table and analysis summary
+                    document.getElementById('risk').innerText = data.risk;
+                    document.getElementById('risk-level').innerText = data.risk;
+
+                    // Update the chart with the new risk data
+                    updateChart(data.risk);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        // Function to update the chart
+        function updateChart(userRisk) {
+            const ctx = document.getElementById('riskChart').getContext('2d');
+            const riskChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['User Risk', 'Average Population Risk'],
+                    datasets: [{
+                        label: 'Alzheimer\'s Risk (%)',
+                        data: [parseFloat(userRisk), 10],  // Example average population risk
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

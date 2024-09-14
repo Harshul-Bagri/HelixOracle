@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+  --primary: 240, 5%, 6%;
+  --primary-foreground: 60, 5%, 90%;
+  --secondary: 240, 0%, 90%;
+  --secondary-foreground: 60, 0%, 0%;
+  --border: 240, 6%, 20%;
+  --background: 240, 5%, 25%;
+  --accent: 240, 0%, 13%;
+  --accent-foreground: 60, 0%, 100%;
+  --card: 240, 4%, 10%;
+  --input: 240, 6%, 20%;
+  --text: 60, 5%, 85%;
+  --disabled: 0, 0%, 60%;
+  --shadow: 0, 0%, 80%;
+}
+body {
+  font-family: "Space Mono", monospace;
+  margin: 0;
+  padding: 0;
+  background-color: hsl(var(--background));
+  color: hsl(var(--text));
+}
+header {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-primary {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: hsl(var(--primary));
+}
+.upload-btn {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  border: 1px solid hsl(var(--border));
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.upload-btn:hover {
+  background-color: hsl(var(--secondary-foreground));
+  color: hsl(var(--secondary));
+}
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.h-screen {
+  height: 100vh;
+}
+.max-w-6xl {
+  max-width: 96rem;
+}
+.mx-auto {
+  margin: 0 auto;
+}
+.border {
+  border: 1px solid hsl(var(--border));
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.relative {
+  position: relative;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.text-sm {
+  font-size: 0.875rem;
+}
+.text-right {
+  text-align: right;
+}
+.font-medium {
+  font-weight: 500;
+}
+.text-lg {
+  font-size: 2rem;
+}
+.text-fg {
+  font-size: 1.25rem;
+}
+.bg-muted {
+  background-color: hsl(var(--background));
+}
+.bg-card {
+  background-color: hsl(var(--card));
+}
+.bg-primary {
+  background-color: hsl(var(--primary));
+}
+.text-primary-foreground {
+  color: hsl(var(--primary-foreground));
+}
+.hover\:bg-muted\/50:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.transition-colors {
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 1rem; /* Add padding to table cells */
+  border: 1px solid hsl(var(--border));
+}
+thead th {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+.info-box {
+  background-color: hsl(var(--card));
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+.info-box h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
